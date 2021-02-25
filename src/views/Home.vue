@@ -2,6 +2,7 @@
 import shuffle from "lodash/shuffle";
 // @ is an alias to /src
 import PeopleList from "@/components/PeopleList.vue";
+import HelloWorld from "@/components/HelloWorld.vue";
 
 const samplePeople = [
   {
@@ -45,6 +46,7 @@ const samplePeople = [
 export default {
   name: "Home",
   components: {
+    HelloWorld,
     PeopleList
   },
   data() {
@@ -95,6 +97,7 @@ export default {
 
 <template>
   <div class="home">
+    <HelloWorld />
     <h2>Contestants</h2>
     <PeopleList :people="contestants" :highlightWinner="highlightWinner" />
     <button @click="randomize">Randomize! 🤪</button>

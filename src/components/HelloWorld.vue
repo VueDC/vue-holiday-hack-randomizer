@@ -73,18 +73,51 @@
           rel="noopener"
           >awesome-vue</a
         >
+        {{ allCapsMsgWithPrefix }}
+
+        {{ joinedArray }}
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
+
+interface BryansObject {
+  name: string;
+  value: string;
+}
 
 export default defineComponent({
   name: "HelloWorld",
+  setup() {
+    // Composition API
+    // const traceysArray = ref<BryansObject[]>([{ name: 'Bryan', value: 'bryan' }])
+    const traceysArray = ref([{ name: "Bryan", value: "bryan" }]);
+
+    const joinedArray = computed(() => {
+      return traceysArray.value.map(obj => obj.name).join(", ") ?? "";
+    });
+
+    return { traceysArray, joinedArray };
+  },
+  data() {
+    return {
+      count: 0
+      // traceysArray: null as BryansObject[] | null
+    };
+  },
   props: {
     msg: String
+  },
+  computed: {
+    allCapsMsg(): string {
+      return this.msg?.toUpperCase() ?? "";
+    },
+    allCapsMsgWithPrefix(): string {
+      return `HI-${this.allCapsMsg}`;
+    }
   }
 });
 </script>
